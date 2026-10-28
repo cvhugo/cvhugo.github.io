@@ -1,40 +1,46 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hugo Iglesias</title>
+  <title>CV y LinkedIn</title>
   <style>
+    * { box-sizing: border-box; }
+    html { background: #000; }
     body {
-      background: #101114;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 70px 20px;
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: #000;
     }
-    h1 { margin-bottom: 8px; }
-    p { color: #aaa; }
-    a {
-      display: block;
-      max-width: 320px;
-      margin: 14px auto;
-      padding: 16px;
-      border: 1px solid #555;
-      border-radius: 12px;
-      color: white;
-      text-decoration: none;
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: min(100%, 320px);
     }
-    a:hover { background: #292b32; }
+    a { display: block; width: 100%; }
+    a:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 6px;
+    }
+    img { display: block; width: 100%; height: auto; }
   </style>
 </head>
 <body>
-  <h1>Hugo Iglesias</h1>
-  <p>Telecommunications Engineering</p>
-  <p>Telematics</p>
-
-  <a href="CV.pdf" target="_blank">View / Download CV</a>
-  <a href="https://linkedin.com/in/hugoi-">LinkedIn</a>
-  <a href="https://github.com/cvhugo">GitHub</a>
+  <main aria-label="CV y LinkedIn">
+    <a href="CV.pdf" aria-label="Ver CV">
+      <img src="cv.png" alt="CV">
+    </a>
+    <!-- Sustituye esta URL por la de tu perfil de LinkedIn. -->
+    <a href="https://www.linkedin.com/in/hugoi-/"
+       aria-label="Ver perfil de LinkedIn">
+      <img src="linkedin.png" alt="LinkedIn">
+    </a>
+  </main>
 </body>
 </html>
