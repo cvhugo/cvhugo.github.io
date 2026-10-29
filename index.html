@@ -1,46 +1,228 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CV y LinkedIn</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0d">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Hugo Iglesias — Curriculum Vitae and LinkedIn.">
+  <title>Hugo Iglesias</title>
   <style>
-    * { box-sizing: border-box; }
-    html { background: #000; }
+    :root {
+      color-scheme: dark;
+      --ink: #f3f3f5;
+      --muted: #adadb3;
+      --background: #0b0b0d;
+      --pointer-x: 50%;
+      --pointer-y: 40%;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { min-height: 100%; background: var(--background); }
     body {
       margin: 0;
+      min-width: 280px;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* A barely-there illuminated surface, not a tech wallpaper. */
+    .wallpaper {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 46% 38% at 50% 40%, rgba(95, 96, 113, .17), transparent 100%),
+        radial-gradient(ellipse 42% 54% at 83% 100%, rgba(38, 39, 49, .18), transparent 100%),
+        #0b0b0d;
+    }
+    .wallpaper::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,.027), transparent 26%);
+      pointer-events: none;
+    }
+
+    .site {
       min-height: 100vh;
       min-height: 100svh;
       display: grid;
-      place-items: center;
-      padding: 32px 20px;
-      background: #000;
+      grid-template-rows: auto 1fr auto;
+      padding: 31px 39px 28px;
     }
+    .name {
+      justify-self: start;
+      font: 500 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      color: #c4c4c9;
+      user-select: none;
+    }
+
     main {
+      display: grid;
+      place-items: center;
+      padding-bottom: 20px;
+    }
+    .apps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: clamp(33px, 6.8vw, 84px);
+      transform: translateY(-1.2vh);
+    }
+    .app {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
-      width: min(100%, 320px);
+      gap: 18px;
+      width: 139px;
+      color: inherit;
+      text-align: center;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      outline-offset: 8px;
+      animation: arrive .78s cubic-bezier(.18,.77,.25,1) both;
     }
-    a { display: block; width: 100%; }
-    a:focus-visible {
-      outline: 2px solid #fff;
-      outline-offset: 6px;
+    .app:nth-child(2) { animation-delay: .11s; }
+    .icon {
+      width: 112px;
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      border-radius: 26px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.36), 0 1px 1px rgba(0,0,0,.35);
+      position: relative;
+      transition: transform .46s cubic-bezier(.16,1,.3,1), box-shadow .46s cubic-bezier(.16,1,.3,1);
+      transform: translateZ(0);
     }
-    img { display: block; width: 100%; height: auto; }
+    .icon svg { display: block; width: 100%; height: 100%; border-radius: inherit; }
+    .icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .app-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 450;
+      line-height: 1.25;
+      letter-spacing: -.018em;
+      white-space: nowrap;
+      color: #dfdfe3;
+      transition: color .25s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .app:hover .icon {
+        transform: translateY(-8px) scale(1.065);
+        box-shadow: 0 20px 48px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.28);
+      }
+      .app:hover .app-label { color: #fff; }
+    }
+    .app:active .icon { transform: scale(.955); transition-duration: .12s; }
+    .app:focus-visible { outline: 1px solid #e9e9ef; border-radius: 10px; }
+    .footer {
+      justify-self: center;
+      width: 28px;
+      height: 2px;
+      border-radius: 2px;
+      background: #303034;
+      opacity: .72;
+      pointer-events: none;
+    }
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(15px) scale(.96); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @media (max-width: 560px) {
+      .site { padding: 27px 24px 24px; }
+      .apps { gap: clamp(14px, 8vw, 37px); transform: translateY(-1.4vh); }
+      .app { width: 124px; gap: 15px; }
+      .icon { width: 98px; border-radius: 23px; }
+      .app-label { font-size: 12.5px; }
+      .name { font-size: 10px; }
+      .wallpaper { background: radial-gradient(ellipse 82% 34% at 50% 44%, rgba(85,87,107,.16),transparent 100%), #0b0b0d; }
+    }
+    @media (max-width: 340px) {
+      .apps { gap: 10px; }
+      .app { width: 112px; }
+      .icon { width: 86px; border-radius: 21px; }
+      .app-label { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <main aria-label="CV y LinkedIn">
-    <a href="CV.pdf" aria-label="Ver CV">
-      <img src="cv.png" alt="CV">
-    </a>
-    <!-- Sustituye esta URL por la de tu perfil de LinkedIn. -->
-    <a href="https://www.linkedin.com/in/hugoi-/"
-       aria-label="Ver perfil de LinkedIn">
-      <img src="linkedin.png" alt="LinkedIn">
-    </a>
-  </main>
+  <div class="wallpaper" aria-hidden="true"></div>
+  <div class="site">
+    <header class="name">Hugo Iglesias</header>
+    <main>
+      <nav class="apps" aria-label="Links">
+        <!-- Keep CV.pdf next to this index.html in your GitHub Pages repository. -->
+        <a class="app" href="CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Curriculum Vitae PDF">
+          <span class="icon" aria-hidden="true">
+            <!-- iOS Files-inspired app icon, drawn in SVG so no images are needed. -->
+            <svg viewBox="0 0 112 112" xmlns="http://www.w3.org/2000/svg" role="presentation">
+              <defs>
+                <linearGradient id="file-bg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset="1" stop-color="#e9eaf1"/>
+                </linearGradient>
+                <linearGradient id="folder" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#59aeff"/>
+                  <stop offset="1" stop-color="#1577e5"/>
+                </linearGradient>
+              </defs>
+              <rect width="112" height="112" rx="26" fill="url(#file-bg)"/>
+              <path d="M21 40c0-4 3-7 7-7h22c2 0 3.8.8 5.2 2.2l5.4 5.2H84a7 7 0 0 1 7 7v29a7 7 0 0 1-7 7H28a7 7 0 0 1-7-7V40Z" fill="url(#folder)"/>
+              <path d="M21 47a7 7 0 0 1 7-7h56a7 7 0 0 1 7 7v3H21v-3Z" fill="#76beff" opacity=".65"/>
+              <path d="M28 34h22c2 0 3.8.8 5.2 2.2l4.5 4.5H28c-3.2 0-5.6 1-7 3V41c0-4 3-7 7-7Z" fill="#69b7ff"/>
+            </svg>
+          </span>
+          <span class="app-label">Curriculum Vitae</span>
+        </a>
+
+        <!-- Replace TU-PERFIL with your real public LinkedIn profile slug. -->
+        <a class="app" href="https://www.linkedin.com/in/TU-PERFIL/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 112 112" xmlns="http://www.w3.org/2000/svg" role="presentation">
+              <rect width="112" height="112" rx="26" fill="#0a66c2"/>
+              <circle cx="33.5" cy="35.5" r="7.3" fill="#ffffff"/>
+              <rect x="27" y="47" width="13" height="39" rx="1.3" fill="#ffffff"/>
+              <path d="M50 47h12.5v5.3c2.1-3.8 6.4-6.7 12.5-6.7 13 0 15.3 8.3 15.3 19.8V86H77V67.5c0-5-0.1-10.2-6.6-10.2-6.5 0-7.5 5-7.5 9.9V86H50V47Z" fill="#ffffff"/>
+            </svg>
+          </span>
+          <span class="app-label">LinkedIn</span>
+        </a>
+      </nav>
+    </main>
+    <div class="footer" aria-hidden="true"></div>
+  </div>
+  <script>
+    // Only a tiny ambient light follows the pointer on desktop.
+    if (window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) {
+      let frame = null;
+      document.addEventListener('pointermove', (event) => {
+        if (frame !== null) return;
+        const x = event.clientX;
+        const y = event.clientY;
+        frame = requestAnimationFrame(() => {
+          document.documentElement.style.setProperty('--pointer-x', `${(x / innerWidth) * 100}%`);
+          document.documentElement.style.setProperty('--pointer-y', `${(y / innerHeight) * 100}%`);
+          frame = null;
+        });
+      }, { passive: true });
+    }
+  </script>
 </body>
 </html>
